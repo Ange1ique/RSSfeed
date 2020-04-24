@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_block %}
+  RSS feed
+{% endblock %}
+
+{% block body_block %}
+  <h3>Get the RSS feed for the following sites;</h3>
+  <br>
+
+  <form class="text-left" action="{% url 'RSSapp:index' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <label class="mt-3 mb-0">URL {{ forloop.counter }}:</label>{{ field }}
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-danger btn-block" name="button">Get feed</button>
+  </form>
+
+{% endblock %}
+
+{% block footer_block %}
+  <p class="text-center">Today: {{ date }}</p>
+{% endblock %}
